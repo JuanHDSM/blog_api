@@ -1,4 +1,4 @@
-namespace Blog.Models
+namespace BlogApi.Models
 {
     public class User
     {

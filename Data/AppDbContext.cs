@@ -1,10 +1,10 @@
-using Blog.Data.Mappings;
-using Blog.Models;
+using BlogApi.Data.Mappings;
+using BlogApi.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Blog.Data
+namespace BlogApi.Data
 {
-    public class BlogDataContext : DbContext
+    public class AppDbContext : DbContext
     {
 
         public DbSet<Category> Categories { get; set; }
