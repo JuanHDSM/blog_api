@@ -89,6 +89,9 @@ namespace blog_api.Controllers
             [FromServices] AppDbContext context
         )
         {
+            if (!ModelState.IsValid)
+                return BadRequest(new ResultViewModel<Category>(ModelState.GetErrors()));
+
             var category = await context.Categories.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 
             if (category == null)
