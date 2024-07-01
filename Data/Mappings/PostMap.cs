@@ -56,10 +56,10 @@ namespace BlogApi.Data.Mappings
                 .HasForeignKey("author_id")
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // builder.HasOne(x => x.Category)
-            //     .WithMany(x => x.Posts)
-            //     .HasForeignKey("category_id")
-            //     .OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.Category)
+                .WithMany(x => x.Posts)
+                .HasForeignKey("category_id")
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(x => x.Tags).WithMany(x => x.Posts)
                 .UsingEntity<Dictionary<string, object>>(
