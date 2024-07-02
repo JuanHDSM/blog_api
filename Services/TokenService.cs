@@ -3,6 +3,7 @@ using System.Text;
 using BlogApi;
 using BlogApi.Models;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace blog_api.Services
 {
@@ -14,6 +15,13 @@ namespace blog_api.Services
             var key = Encoding.ASCII.GetBytes(Configuration.JwtKey);
             var tokenDescripton = new SecurityTokenDescriptor
             {
+                Subject = new ClaimsIdentity(
+                [
+                    new Claim(ClaimTypes.Name, "juanholy"),
+                    new Claim(ClaimTypes.Role, "user"),
+                    new Claim(ClaimTypes.Role, "admin"),
+                    new Claim("fruta", "banana")
+                ]),
                 Expires = DateTime.UtcNow.AddHours(8),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key), 

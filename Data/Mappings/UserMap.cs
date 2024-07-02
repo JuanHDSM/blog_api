@@ -22,10 +22,20 @@ namespace BlogApi.Data.Mappings
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(80);
 
-            builder.Property(x => x.Bio).HasColumnName("bio");
-            builder.Property(x => x.Email).HasColumnName("email");
-            builder.Property(x => x.Image).HasColumnName("image");
-            builder.Property(x => x.PasswordHash).HasColumnName("password_hash");
+            builder.Property(x => x.Bio).HasColumnName("bio").IsRequired(false);
+
+            builder.Property(x => x.Email)
+            .IsRequired()
+            .HasColumnName("email")
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(160);
+
+            builder.Property(x => x.Image).HasColumnName("image").IsRequired(false);
+            builder.Property(x => x.PasswordHash)
+            .IsRequired()
+            .HasColumnName("password_hash")
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(255);
 
             builder.Property(x => x.Slug)
                 .IsRequired()
