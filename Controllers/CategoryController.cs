@@ -71,7 +71,7 @@ namespace blog_api.Controllers
 
                 return Created($"/categories/{category.Id}", category);
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 return StatusCode(500, "01X03 - Não foi possível cadastrar a categoria");
             }
@@ -124,7 +124,7 @@ namespace blog_api.Controllers
 
                 return Ok(new ResultViewModel<Category>(category));
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 return StatusCode(500, "01X05 - Falha interna no servidor");
             }
