@@ -3,6 +3,7 @@ using blog_api.Services;
 using blog_api.ViewModels;
 using BlogApi.Data;
 using BlogApi.Models;
+using BlogApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecureIdentity.Password;
@@ -17,6 +18,7 @@ namespace BlogApi.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Post(
             [FromBody] RegisterViewModel model,
+            [FromServices] EmailService emailService,
             [FromServices] AppDbContext context)
         {
             if (!ModelState.IsValid)
@@ -37,6 +39,12 @@ namespace BlogApi.Controllers
             {
                 await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();
+
+                emailService.Send(
+                    user.Name, 
+                    user.Email, 
+                    "Welcome to Holy.io", 
+                    $"Your Password is <strong>{password}</strong>");
 
                 return Ok(new ResultViewModel<dynamic>(new
                 {
