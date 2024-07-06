@@ -13,7 +13,7 @@ namespace BlogApi.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<User> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseMySql("server=localhost,3306;database=blog;User ID=root;Password=;", new MySqlServerVersion(new Version(8, 0, 2)));
+            => optionsBuilder.UseMySql("Server=monorail.proxy.rlwy.net;Port=16083;Database=railway;Uid=root;Pwd=sASiVIUrvuBoRpNFfSQMNdEqjGMFwdwA", new MySqlServerVersion(new Version(8, 0, 2)));
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
