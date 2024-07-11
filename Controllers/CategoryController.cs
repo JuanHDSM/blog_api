@@ -1,5 +1,6 @@
 using blog_api.Extensions;
 using blog_api.ViewModels;
+using blog_api.ViewModels.Categories;
 using BlogApi.Data;
 using BlogApi.Models;
 using Microsoft.AspNetCore.Mvc;
