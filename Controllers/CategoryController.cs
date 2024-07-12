@@ -14,12 +14,22 @@ namespace blog_api.Controllers
     {
         [HttpGet]
         public async Task<IActionResult> GetAllAsync(
-            [FromServices] AppDbContext context)
+            [FromServices] AppDbContext context,
+            [FromQuery] int page = 0,
+            [FromQuery] int pageSize = 25
+            )
         {
             try
             {
+                var total = await context.Categories.CountAsync();
                 var categories = await context.Categories.AsNoTracking().ToListAsync();
-                return Ok(new ResultViewModel<List<Category>>(categories));
+                return Ok(new ResultViewModel<dynamic>(new
+                {
+                    total,
+                    page,
+                    pageSize,
+                    categories
+                }));
             }
             catch
             {
