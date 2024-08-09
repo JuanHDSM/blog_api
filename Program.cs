@@ -5,6 +5,7 @@ using BlogApi;
 using BlogApi.Data;
 using BlogApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,11 +20,8 @@ LoadConfiguration(app);
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseStaticFiles();
-
 app.MapControllers();
-
+app.UseStaticFiles();
 app.Run();
 
 void LoadConfiguration(WebApplication app)
@@ -73,7 +71,8 @@ void ConfigureMvc(WebApplicationBuilder builder)
 
 void ConfigureServices(WebApplicationBuilder builder)
 {
-    builder.Services.AddDbContext<AppDbContext>();
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 2))));
     builder.Services.AddTransient<TokenService>();
     builder.Services.AddTransient<EmailService>();
 }

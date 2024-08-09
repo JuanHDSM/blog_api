@@ -1,4 +1,3 @@
-using blog_api.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApi.Controllers
@@ -8,10 +7,15 @@ namespace BlogApi.Controllers
     public class HomeController : ControllerBase
     {
         [HttpGet("")]
-        [ApiKey]
-        public IActionResult Get()
+        public IActionResult Get(
+            [FromServices] IConfiguration configuration
+        )
         {
-            return Ok();
+            var env = configuration.GetValue<string>("Env");
+            return Ok(new
+            {
+                enviroment = env
+            });
         }
     }
 }
