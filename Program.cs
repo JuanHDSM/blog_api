@@ -12,17 +12,29 @@ var builder = WebApplication.CreateBuilder(args);
 
 ConfigureAutehntication(builder);
 ConfigureMvc(builder);
-ConfigureServices(builder); 
+ConfigureServices(builder);
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 LoadConfiguration(app);
+
+app.UseRouting();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.UseStaticFiles();
 app.Run();
+
 
 void LoadConfiguration(WebApplication app)
 {

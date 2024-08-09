@@ -1,6 +1,7 @@
 using blog_api.ViewModels;
 using BlogApi.Data;
 using BlogApi.ViewModels.Accounts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace BlogApi.Controllers
 {
     [ApiController]
     [Route("posts")]
+    [Authorize]
     public class PostController : ControllerBase
     {
 
